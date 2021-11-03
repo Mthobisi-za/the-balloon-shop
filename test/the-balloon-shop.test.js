@@ -3,11 +3,20 @@ let TheBalloonShop = require("../the-balloon-shop");
 const pg = require("pg");
 const Pool = pg.Pool;
 
-const connectionString = process.env.DATABASE_URL || 'postgresql://localhost:5432/my_balloon_tests';
 
-const pool = new Pool({
-    connectionString
-});
+var connectionString = process.env.DATABASE_URL;
+var pool;
+if(connectionString){
+   pool = new Pool({connectionString, ssl: {rejectUnauthorized: false}});
+} else{
+ pool = new Pool({
+   user: "postgres",
+   password: "mthobisi",
+   database: "users",
+   port: 5432,
+   host: "localhost"
+})
+}
 
 describe('The balloon function', function () {
 
@@ -20,9 +29,10 @@ describe('The balloon function', function () {
 
     it('should get the valid colors', async function () {
 
-        const theBalloonShop = TheBalloonShop(pool, ['Orange', 'Purple', 'Lime']);
+        const theBalloonShop = TheBalloonShop(pool);
+        theBalloonShop.insertValidColors(['Orange', 'Purple', 'Lime']);
     
-        assert.equal(['Orange', 'Purple', 'Lime'], theBalloonShop.getValidColors());
+        assert.deepEqual(['Orange', 'Purple', 'Lime'], await theBalloonShop.getValidColors());
 
     });
 
@@ -34,7 +44,7 @@ describe('The balloon function', function () {
         await theBalloonShop.requestColor('Red');
         await theBalloonShop.requestColor('Green');
 
-        assert.equal(['Blue', 'Red', 'Green'], theBalloonShop.getInvalidColors());
+        assert.deepEqual(['Blue', 'Red', 'Green'], await theBalloonShop.getInvalidColors());
 
     });
 
