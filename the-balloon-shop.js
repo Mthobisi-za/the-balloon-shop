@@ -1,6 +1,4 @@
 module.exports = (pool) => {
-
-
     // insert valid colors into the database here
     
     async function getValidColors() {
@@ -37,6 +35,6 @@ module.exports = (pool) => {
         colorCount,
         getInvalidColors,
         allColors,
-        insertValidColors
+        //insertValidColors
     }
 }

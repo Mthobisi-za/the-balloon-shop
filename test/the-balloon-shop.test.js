@@ -30,7 +30,7 @@ describe('The balloon function', function () {
     it('should get the valid colors', async function () {
 
         const theBalloonShop = TheBalloonShop(pool);
-        theBalloonShop.insertValidColors(['Orange', 'Purple', 'Lime']);
+        //theBalloonShop.insertValidColors(['Orange', 'Purple', 'Lime']);
     
         assert.deepEqual(['Orange', 'Purple', 'Lime'], await theBalloonShop.getValidColors());
 
