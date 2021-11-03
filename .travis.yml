@@ -9,5 +9,6 @@ env:
   - DATABASE_URL = 'postgresql://postgres@localhost:5432/users'
 
 before_script:
-  - psql -c 'create database users;' -U posstgres
+  - psql -c 'create database users;' -U postgres
   - psql -U postgres -d users -a -f the-balloon.sql
+
