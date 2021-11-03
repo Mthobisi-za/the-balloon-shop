@@ -40,14 +40,14 @@ describe('The balloon function', function () {
 
         const theBalloonShop = TheBalloonShop(pool, ['Orange', 'Purple', 'Lime']);
 
-        await theBalloonShop.requestColor('Blue');
-        await theBalloonShop.requestColor('Red');
-        await theBalloonShop.requestColor('Green');
+        //await theBalloonShop.requestColor('Blue');
+        //await theBalloonShop.requestColor('Red');
+        //await theBalloonShop.requestColor('Green');
 
         assert.deepEqual(['Blue', 'Red', 'Green'], await theBalloonShop.getInvalidColors());
 
     });
-
+/*
     it('should return count for a specific color', async function () {
         const theBalloonShop = TheBalloonShop(pool, ['Orange', 'Purple', 'Lime']);
 
@@ -96,6 +96,7 @@ describe('The balloon function', function () {
         assert.equal(['Red'], await theBalloonShop.getInValidColors());
 
     });
+    */
 
     after(function () {
         pool.end();
